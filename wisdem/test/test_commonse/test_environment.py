@@ -117,6 +117,7 @@ class TestLinearWaves(unittest.TestCase):
 
 class TestPowerWindGradients(unittest.TestCase):
     def test(self):
+
         z = np.linspace(0.0, 100.0, 20)
         nPoints = len(z)
 
@@ -140,6 +141,7 @@ class TestPowerWindGradients(unittest.TestCase):
 
 class TestLogWindGradients(unittest.TestCase):
     def test(self):
+
         nPoints = 20
         z = np.linspace(0.1, 100.0, nPoints)
 

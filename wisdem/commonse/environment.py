@@ -157,6 +157,7 @@ class PowerWind(WindBase):
         self.declare_partials("U", ["Uref", "z", "zref"])
 
     def compute(self, inputs, outputs):
+
         # rename
         z = inputs["z"]
         if isinstance(z, float) or isinstance(z, np.float_):
@@ -183,6 +184,7 @@ class PowerWind(WindBase):
         # self.k = k
 
     def compute_partials(self, inputs, J):
+
         # rename
         z = inputs["z"]
         if isinstance(z, float) or isinstance(z, np.float_):
@@ -260,6 +262,7 @@ class LogWind(WindBase):
         self.declare_partials("U", ["Uref", "z", "zref"])
 
     def compute(self, inputs, outputs):
+
         # rename
         z = inputs["z"]
         if isinstance(z, float) or isinstance(z, np.float_):
@@ -274,6 +277,7 @@ class LogWind(WindBase):
         outputs["U"][idx] = inputs["Uref"] * np.log((z[idx] - z0) / z_roughness) / np.log((zref - z0) / z_roughness)
 
     def compute_partials(self, inputs, J):
+
         # rename
         z = inputs["z"]
         if isinstance(z, float) or isinstance(z, np.float_):
@@ -510,6 +514,7 @@ class TowerSoil(om.ExplicitComponent):
         self.declare_partials("k", ["d0", "depth"])
 
     def compute(self, inputs, outputs):
+
         G = float(inputs["G"])
         nu = float(inputs["nu"])
         depth = float(inputs["depth"])
@@ -536,6 +541,7 @@ class TowerSoil(om.ExplicitComponent):
         outputs["k"][:, ind] = inputs["k_usr"][np.newaxis, ind]
 
     def compute_partials(self, inputs, J):
+
         G = inputs["G"]
         nu = inputs["nu"]
         h = np.linspace(inputs["depth"], 0.0, self.options["npts"])

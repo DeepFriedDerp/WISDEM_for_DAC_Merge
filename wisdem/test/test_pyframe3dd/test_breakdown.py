@@ -2,7 +2,6 @@ import unittest
 
 import numpy as np
 import numpy.testing as npt
-
 from wisdem.pyframe3dd import Frame, Options, NodeData, ElementData, ReactionData, StaticLoadCase
 
 
@@ -356,6 +355,7 @@ class TestBreakdown(unittest.TestCase):
         """
 
     def testModal(self):
+
         # nodes
         nn = 11
         node = np.arange(1, nn + 1, dtype=np.int_)

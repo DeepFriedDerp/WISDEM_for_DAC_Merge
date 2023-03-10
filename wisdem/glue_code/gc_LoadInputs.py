@@ -1,10 +1,10 @@
 import numpy as np
-
 import wisdem.inputs as sch
 
 
 class WindTurbineOntologyPython(object):
     def __init__(self, fname_input_wt, fname_input_modeling, fname_input_analysis):
+
         self.modeling_options = sch.load_modeling_yaml(fname_input_modeling)
         self.analysis_options = sch.load_analysis_yaml(fname_input_analysis)
         if fname_input_wt is None:
@@ -204,11 +204,16 @@ class WindTurbineOntologyPython(object):
                 ]["webs"][i]["name"]
 
             # Distributed aerodynamic control devices along blade
-            self.modeling_options["WISDEM"]["RotorSE"]["n_te_flaps"] = 0
+            self.modeling_options["WISDEM"]["RotorSE"]["n_dac"] = 0
             if "aerodynamic_control" in self.wt_init["components"]["blade"]:
                 if "te_flaps" in self.wt_init["components"]["blade"]["aerodynamic_control"]:
-                    self.modeling_options["WISDEM"]["RotorSE"]["n_te_flaps"] = len(
+                    self.modeling_options["WISDEM"]["RotorSE"]["n_dac"] = len(
                         self.wt_init["components"]["blade"]["aerodynamic_control"]["te_flaps"]
+                    )
+                    self.modeling_options["WISDEM"]["RotorSE"]["n_tab"] = 3
+                elif "le_spoilers" in self.wt_init["components"]["blade"]["aerodynamic_control"]:
+                    self.modeling_options["WISDEM"]["RotorSE"]["n_dac"] = len(
+                        self.wt_init["components"]["blade"]["aerodynamic_control"]["le_spoilers"]
                     )
                     self.modeling_options["WISDEM"]["RotorSE"]["n_tab"] = 3
                 else:
@@ -249,9 +254,16 @@ class WindTurbineOntologyPython(object):
 
         # Monopile
         if self.modeling_options["flags"]["monopile"]:
-            self.modeling_options["WISDEM"]["FixedBottomSE"]["n_height"] = len(
-                self.wt_init["components"]["monopile"]["outer_shape_bem"]["outer_diameter"]["grid"]
+            monopile = self.wt_init["components"]["monopile"]
+            svec = np.unique(
+                np.r_[
+                    monopile["outer_shape_bem"]["outer_diameter"]["grid"],
+                    monopile["outer_shape_bem"]["reference_axis"]["x"]["grid"],
+                    monopile["outer_shape_bem"]["reference_axis"]["y"]["grid"],
+                    monopile["outer_shape_bem"]["reference_axis"]["z"]["grid"],
+                ]
             )
+            self.modeling_options["WISDEM"]["FixedBottomSE"]["n_height"] = len(svec)
             self.modeling_options["WISDEM"]["FixedBottomSE"]["n_layers"] = len(
                 self.wt_init["components"]["monopile"]["internal_structure_2d_fem"]["layers"]
             )
@@ -740,6 +752,7 @@ class WindTurbineOntologyPython(object):
             self.modeling_options["floating"]["members"]["name2idx"] = name2grp
 
     def write_ontology(self, wt_opt, fname_output):
+
         # Update blade
         if self.modeling_options["flags"]["blade"]:
             # Update blade outer shape
@@ -1081,6 +1094,7 @@ class WindTurbineOntologyPython(object):
 
         # Update generator
         if self.modeling_options["flags"]["generator"]:
+
             self.wt_init["components"]["nacelle"]["generator"]["B_r"] = float(wt_opt["generator.B_r"])
             self.wt_init["components"]["nacelle"]["generator"]["P_Fe0e"] = float(wt_opt["generator.P_Fe0e"])
             self.wt_init["components"]["nacelle"]["generator"]["P_Fe0h"] = float(wt_opt["generator.P_Fe0h"])

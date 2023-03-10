@@ -11,6 +11,7 @@ npts = 5
 
 class TestOC3Mass(unittest.TestCase):
     def testMassPropertiesSpar(self):
+
         opt = {}
         opt["floating"] = {}
         opt["flags"] = {}

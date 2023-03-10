@@ -10,7 +10,6 @@
 
 
 import numpy as np
-
 import wisdem.moorpy as mp
 
 ms = mp.System("lines.txt")

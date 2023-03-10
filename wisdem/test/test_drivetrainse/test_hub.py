@@ -21,6 +21,7 @@ class TestHub(unittest.TestCase):
         self.assertAlmostEqual(outputs["max_torque"], 1e4 * np.pi / 30.0 / 5.0)
 
     def testPitch(self):
+
         pitch = hub.PitchSystem()
         inputs = {}
         outputs = {}

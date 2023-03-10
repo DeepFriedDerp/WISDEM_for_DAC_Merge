@@ -81,6 +81,7 @@ class ParametrizeBladeAero(om.ExplicitComponent):
         )
 
     def compute(self, inputs, outputs):
+
         spline = PchipInterpolator
         twist_spline = spline(inputs["s_opt_twist"], inputs["twist_opt"])
         outputs["twist_param"] = twist_spline(inputs["s"])
@@ -181,6 +182,7 @@ class ParametrizeBladeStruct(om.ExplicitComponent):
         )
 
     def compute(self, inputs, outputs):
+
         layer_name = self.options["rotorse_options"]["layer_name"]
 
         spar_cap_ss_name = self.options["rotorse_options"]["spar_cap_ss"]

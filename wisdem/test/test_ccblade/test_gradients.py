@@ -24,6 +24,7 @@ basepath = os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../../e
 
 class TestGradients(unittest.TestCase):
     def setUp(self):
+
         # geometry
         self.Rhub = 1.5
         self.Rtip = 63.0
@@ -176,6 +177,7 @@ class TestGradients(unittest.TestCase):
         self.npts = 1  # len(Uinf)
 
     def test_dr1(self):
+
         dNp_dr = self.dNp["dr"]
         dTp_dr = self.dTp["dr"]
         dNp_dr_fd = np.zeros((self.n, self.n))
@@ -216,6 +218,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dr_fd, dTp_dr, rtol=1e-4, atol=1e-8)
 
     def test_dr2(self):
+
         dT_dr = self.dT["dr"]
         dY_dr = self.dY["dr"]
         dZ_dr = self.dZ["dr"]
@@ -286,6 +289,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dr_fd, dP_dr, rtol=3e-4, atol=1e-8)
 
     def test_dr3(self):
+
         dCT_dr = self.dCT["dr"]
         dCY_dr = self.dCY["dr"]
         dCZ_dr = self.dCZ["dr"]
@@ -356,6 +360,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dCP_dr_fd, dCP_dr, rtol=3e-4, atol=1e-8)
 
     def test_dchord1(self):
+
         dNp_dchord = self.dNp["dchord"]
         dTp_dchord = self.dTp["dchord"]
         dNp_dchord_fd = np.zeros((self.n, self.n))
@@ -396,6 +401,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dchord_fd, dTp_dchord, rtol=5e-5, atol=1e-8)
 
     def test_dchord2(self):
+
         dT_dchord = self.dT["dchord"]
         dY_dchord = self.dY["dchord"]
         dZ_dchord = self.dZ["dchord"]
@@ -466,6 +472,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dchord_fd, dP_dchord, rtol=7e-5, atol=1e-8)
 
     def test_dchord3(self):
+
         dCT_dchord = self.dCT["dchord"]
         dCY_dchord = self.dCY["dchord"]
         dCZ_dchord = self.dCZ["dchord"]
@@ -536,6 +543,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dCP_dchord_fd, dCP_dchord, rtol=7e-5, atol=1e-8)
 
     def test_dtheta1(self):
+
         dNp_dtheta = self.dNp["dtheta"]
         dTp_dtheta = self.dTp["dtheta"]
         dNp_dtheta_fd = np.zeros((self.n, self.n))
@@ -576,6 +584,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dtheta_fd, dTp_dtheta, rtol=1e-4, atol=1e-8)
 
     def test_dtheta2(self):
+
         dT_dtheta = self.dT["dtheta"]
         dY_dtheta = self.dY["dtheta"]
         dZ_dtheta = self.dZ["dtheta"]
@@ -646,6 +655,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dtheta_fd, dP_dtheta, rtol=7e-5, atol=1e-8)
 
     def test_dtheta3(self):
+
         dCT_dtheta = self.dCT["dtheta"]
         dCY_dtheta = self.dCY["dtheta"]
         dCZ_dtheta = self.dCZ["dtheta"]
@@ -716,6 +726,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dCP_dtheta_fd, dCP_dtheta, rtol=7e-5, atol=1e-8)
 
     def test_dRhub1(self):
+
         dNp_dRhub = self.dNp["dRhub"]
         dTp_dRhub = self.dTp["dRhub"]
 
@@ -756,6 +767,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dRhub_fd, dTp_dRhub, rtol=1e-4, atol=1e-6)
 
     def test_dRhub2(self):
+
         dT_dRhub = self.dT["dRhub"]
         dY_dRhub = self.dY["dRhub"]
         dZ_dRhub = self.dZ["dRhub"]
@@ -826,6 +838,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dRhub_fd, dP_dRhub, rtol=5e-5, atol=1e-8)
 
     def test_dRhub3(self):
+
         dCT_dRhub = self.dCT["dRhub"]
         dCY_dRhub = self.dCY["dRhub"]
         dCZ_dRhub = self.dCZ["dRhub"]
@@ -896,6 +909,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dCP_dRhub_fd, dCP_dRhub, rtol=5e-5, atol=1e-8)
 
     def test_dRtip1(self):
+
         dNp_dRtip = self.dNp["dRtip"]
         dTp_dRtip = self.dTp["dRtip"]
 
@@ -936,6 +950,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dRtip_fd, dTp_dRtip, rtol=1e-4, atol=1e-8)
 
     def test_dRtip2(self):
+
         dT_dRtip = self.dT["dRtip"]
         dY_dRtip = self.dY["dRtip"]
         dZ_dRtip = self.dZ["dRtip"]
@@ -1006,6 +1021,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dRtip_fd, dP_dRtip, rtol=5e-5, atol=1e-8)
 
     def test_dRtip3(self):
+
         dCT_dRtip = self.dCT["dRtip"]
         dCY_dRtip = self.dCY["dRtip"]
         dCZ_dRtip = self.dCZ["dRtip"]
@@ -1076,6 +1092,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dCP_dRtip_fd, dCP_dRtip, rtol=5e-5, atol=1e-8)
 
     def test_dprecone1(self):
+
         dNp_dprecone = self.dNp["dprecone"]
         dTp_dprecone = self.dTp["dprecone"]
 
@@ -1116,6 +1133,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dprecone_fd, dTp_dprecone, rtol=1e-5, atol=1e-7)
 
     def test_dprecone2(self):
+
         dT_dprecone = self.dT["dprecone"]
         dY_dprecone = self.dY["dprecone"]
         dZ_dprecone = self.dZ["dprecone"]
@@ -1186,6 +1204,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dprecone_fd, dP_dprecone, rtol=5e-5, atol=1e-8)
 
     def test_dprecone3(self):
+
         dCT_dprecone = self.dCT["dprecone"]
         dCY_dprecone = self.dCY["dprecone"]
         dCZ_dprecone = self.dCZ["dprecone"]
@@ -1256,6 +1275,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dCP_dprecone_fd, dCP_dprecone, rtol=5e-5, atol=1e-8)
 
     def test_dtilt1(self):
+
         dNp_dtilt = self.dNp["dtilt"]
         dTp_dtilt = self.dTp["dtilt"]
 
@@ -1296,6 +1316,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dtilt_fd, dTp_dtilt, rtol=1e-5, atol=1e-8)
 
     def test_dtilt2(self):
+
         dT_dtilt = self.dT["dtilt"]
         dY_dtilt = self.dY["dtilt"]
         dZ_dtilt = self.dZ["dtilt"]
@@ -1366,6 +1387,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dtilt_fd, dP_dtilt, rtol=5e-5, atol=1e-8)
 
     def test_dtilt3(self):
+
         dCT_dtilt = self.dCT["dtilt"]
         dCY_dtilt = self.dCY["dtilt"]
         dCZ_dtilt = self.dCZ["dtilt"]
@@ -1436,6 +1458,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dCP_dtilt_fd, dCP_dtilt, rtol=5e-5, atol=1e-8)
 
     def test_dhubht1(self):
+
         dNp_dhubht = self.dNp["dhubHt"]
         dTp_dhubht = self.dTp["dhubHt"]
 
@@ -1476,6 +1499,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dhubht_fd, dTp_dhubht, rtol=1e-5, atol=1e-8)
 
     def test_dhubht2(self):
+
         dT_dhubht = self.dT["dhubHt"]
         dY_dhubht = self.dY["dhubHt"]
         dZ_dhubht = self.dZ["dhubHt"]
@@ -1546,6 +1570,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dhubht_fd, dP_dhubht, rtol=5e-5, atol=1e-8)
 
     def test_dhubht3(self):
+
         dCT_dhubht = self.dCT["dhubHt"]
         dCY_dhubht = self.dCY["dhubHt"]
         dCZ_dhubht = self.dCZ["dhubHt"]
@@ -1616,6 +1641,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dCP_dhubht_fd, dCP_dhubht, rtol=5e-5, atol=1e-8)
 
     def test_dyaw1(self):
+
         dNp_dyaw = self.dNp["dyaw"]
         dTp_dyaw = self.dTp["dyaw"]
 
@@ -1656,6 +1682,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dyaw_fd, dTp_dyaw, rtol=1e-5, atol=1e-8)
 
     def test_dyaw2(self):
+
         dT_dyaw = self.dT["dyaw"]
         dY_dyaw = self.dY["dyaw"]
         dZ_dyaw = self.dZ["dyaw"]
@@ -1726,6 +1753,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dyaw_fd, dP_dyaw, rtol=5e-5, atol=1e-8)
 
     def test_dyaw3(self):
+
         dCT_dyaw = self.dCT["dyaw"]
         dCY_dyaw = self.dCY["dyaw"]
         dCZ_dyaw = self.dCZ["dyaw"]
@@ -1796,6 +1824,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dCP_dyaw_fd, dCP_dyaw, rtol=5e-5, atol=1e-8)
 
     def test_dshear1(self):
+
         dNp_dshear = self.dNp["dshear"]
         dTp_dshear = self.dTp["dshear"]
 
@@ -1836,6 +1865,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dshear_fd, dTp_dshear, rtol=1e-5, atol=1e-8)
 
     def test_dshear2(self):
+
         dT_dshear = self.dT["dshear"]
         dY_dshear = self.dY["dshear"]
         dZ_dshear = self.dZ["dshear"]
@@ -1906,6 +1936,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dshear_fd, dP_dshear, rtol=5e-5, atol=1e-8)
 
     def test_dshear3(self):
+
         dCT_dshear = self.dCT["dshear"]
         dCY_dshear = self.dCY["dshear"]
         dCZ_dshear = self.dCZ["dshear"]
@@ -1976,6 +2007,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dCP_dshear_fd, dCP_dshear, rtol=5e-5, atol=1e-8)
 
     def test_dazimuth1(self):
+
         dNp_dazimuth = self.dNp["dazimuth"]
         dTp_dazimuth = self.dTp["dazimuth"]
 
@@ -1997,6 +2029,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dazimuth_fd, dTp_dazimuth, rtol=1e-5, atol=1e-6)
 
     def test_dUinf1(self):
+
         dNp_dUinf = self.dNp["dUinf"]
         dTp_dUinf = self.dTp["dUinf"]
 
@@ -2018,6 +2051,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dUinf_fd, dTp_dUinf, rtol=1e-5, atol=1e-6)
 
     def test_dUinf2(self):
+
         dT_dUinf = self.dT["dUinf"]
         dY_dUinf = self.dY["dUinf"]
         dZ_dUinf = self.dZ["dUinf"]
@@ -2069,6 +2103,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dUinf_fd, dP_dUinf, rtol=5e-5, atol=1e-8)
 
     def test_dUinf3(self):
+
         dCT_dUinf = self.dCT["dUinf"]
         dCY_dUinf = self.dCY["dUinf"]
         dCZ_dUinf = self.dCZ["dUinf"]
@@ -2120,6 +2155,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dCP_dUinf_fd, dCP_dUinf, rtol=5e-5, atol=1e-8)
 
     def test_dOmega1(self):
+
         dNp_dOmega = self.dNp["dOmega"]
         dTp_dOmega = self.dTp["dOmega"]
 
@@ -2141,6 +2177,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dOmega_fd, dTp_dOmega, rtol=1e-5, atol=1e-6)
 
     def test_dOmega2(self):
+
         dT_dOmega = self.dT["dOmega"]
         dY_dOmega = self.dY["dOmega"]
         dZ_dOmega = self.dZ["dOmega"]
@@ -2192,6 +2229,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dOmega_fd, dP_dOmega, rtol=5e-5, atol=1e-8)
 
     def test_dOmega3(self):
+
         dCT_dOmega = self.dCT["dOmega"]
         dCY_dOmega = self.dCY["dOmega"]
         dCZ_dOmega = self.dCZ["dOmega"]
@@ -2243,6 +2281,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dCP_dOmega_fd, dCP_dOmega, rtol=5e-5, atol=1e-8)
 
     def test_dpitch1(self):
+
         dNp_dpitch = self.dNp["dpitch"]
         dTp_dpitch = self.dTp["dpitch"]
 
@@ -2264,6 +2303,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dpitch_fd, dTp_dpitch, rtol=5e-5, atol=1e-6)
 
     def test_dpitch2(self):
+
         dT_dpitch = self.dT["dpitch"]
         dY_dpitch = self.dY["dpitch"]
         dZ_dpitch = self.dZ["dpitch"]
@@ -2315,6 +2355,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dpitch_fd, dP_dpitch, rtol=5e-5, atol=1e-8)
 
     def test_dpitch3(self):
+
         dCT_dpitch = self.dCT["dpitch"]
         dCY_dpitch = self.dCY["dpitch"]
         dCZ_dpitch = self.dCZ["dpitch"]
@@ -2366,6 +2407,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dCP_dpitch_fd, dCP_dpitch, rtol=5e-5, atol=1e-8)
 
     def test_dprecurve1(self):
+
         precurve = np.linspace(1, 10, self.n)
         precurveTip = 10.1
         precone = 0.0
@@ -2439,6 +2481,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dprecurve_fd, dTp_dprecurve, rtol=3e-4, atol=1e-8)
 
     def test_dprecurve2(self):
+
         precurve = np.linspace(1, 10, self.n)
         precurveTip = 10.1
         precone = 0.0
@@ -2553,6 +2596,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dprecurve_fd, dP_dprecurve, rtol=3e-4, atol=1e-8)
 
     def test_dprecurve3(self):
+
         precurve = np.linspace(1, 10, self.n)
         precurveTip = 10.1
         precone = 0.0
@@ -2667,6 +2711,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dCP_dprecurve_fd, dCP_dprecurve, rtol=3e-4, atol=1e-8)
 
     def test_dpresweep1(self):
+
         presweep = np.linspace(1, 10, self.n)
         presweepTip = 10.1
         precone = 0.0
@@ -2740,6 +2785,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dpresweep_fd, dTp_dpresweep, rtol=1e-5, atol=1e-8)
 
     def test_dpresweep2(self):
+
         presweep = np.linspace(1, 10, self.n)
         presweepTip = 10.1
         precone = 0.0
@@ -2854,6 +2900,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dpresweep_fd, dP_dpresweep, rtol=3e-4, atol=1e-8)
 
     def test_dpresweep3(self):
+
         presweep = np.linspace(1, 10, self.n)
         presweepTip = 10.1
         precone = 0.0
@@ -2968,6 +3015,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dCP_dpresweep_fd, dCP_dpresweep, rtol=3e-4, atol=1e-8)
 
     def test_dprecurveTip1(self):
+
         precurve = np.linspace(1, 10, self.n)
         precurveTip = 10.1
         precone = 0.0
@@ -3034,6 +3082,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dprecurveTip_fd, 0.0, rtol=1e-4, atol=1e-8)
 
     def test_dprecurveTip2(self):
+
         precurve = np.linspace(1, 10, self.n)
         precurveTip = 10.1
         precone = 0.0
@@ -3148,6 +3197,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dprecurveTip_fd, dP_dprecurveTip, rtol=1e-4, atol=1e-8)
 
     def test_dprecurveTip3(self):
+
         precurve = np.linspace(1, 10, self.n)
         precurveTip = 10.1
         precone = 0.0
@@ -3262,6 +3312,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dCP_dprecurveTip_fd, dCP_dprecurveTip, rtol=1e-4, atol=1e-8)
 
     def test_dpresweepTip1(self):
+
         presweep = np.linspace(1, 10, self.n)
         presweepTip = 10.1
         precone = 0.0
@@ -3328,6 +3379,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dTp_dpresweepTip_fd, 0.0, rtol=1e-4, atol=1e-8)
 
     def test_dpresweepTip2(self):
+
         presweep = np.linspace(1, 10, self.n)
         presweepTip = 10.1
         precone = 0.0
@@ -3442,6 +3494,7 @@ class TestGradients(unittest.TestCase):
         np.testing.assert_allclose(dP_dpresweepTip_fd, dP_dpresweepTip, rtol=1e-4, atol=1e-8)
 
     def test_dpresweepTip3(self):
+
         presweep = np.linspace(1, 10, self.n)
         presweepTip = 10.1
         precone = 0.0
@@ -3558,6 +3611,7 @@ class TestGradients(unittest.TestCase):
 
 class TestGradientsNotRotating(unittest.TestCase):
     def setUp(self):
+
         # geometry
         self.Rhub = 1.5
         self.Rtip = 63.0
@@ -3695,6 +3749,7 @@ class TestGradientsNotRotating(unittest.TestCase):
         self.npts = 1  # len(Uinf)
 
     def test_dr1(self):
+
         dNp_dr = self.dNp["dr"]
         dTp_dr = self.dTp["dr"]
         dNp_dr_fd = np.zeros((self.n, self.n))
@@ -3735,6 +3790,7 @@ class TestGradientsNotRotating(unittest.TestCase):
         np.testing.assert_allclose(dTp_dr_fd, dTp_dr, rtol=1e-4, atol=1e-8)
 
     def test_dchord1(self):
+
         dNp_dchord = self.dNp["dchord"]
         dTp_dchord = self.dTp["dchord"]
         dNp_dchord_fd = np.zeros((self.n, self.n))
@@ -3775,6 +3831,7 @@ class TestGradientsNotRotating(unittest.TestCase):
         np.testing.assert_allclose(dTp_dchord_fd, dTp_dchord, rtol=5e-5, atol=1e-8)
 
     def test_dtheta1(self):
+
         dNp_dtheta = self.dNp["dtheta"]
         dTp_dtheta = self.dTp["dtheta"]
         dNp_dtheta_fd = np.zeros((self.n, self.n))
@@ -3815,6 +3872,7 @@ class TestGradientsNotRotating(unittest.TestCase):
         np.testing.assert_allclose(dTp_dtheta_fd, dTp_dtheta, rtol=1e-4, atol=1e-6)
 
     def test_dRhub1(self):
+
         dNp_dRhub = self.dNp["dRhub"]
         dTp_dRhub = self.dTp["dRhub"]
 
@@ -3855,6 +3913,7 @@ class TestGradientsNotRotating(unittest.TestCase):
         np.testing.assert_allclose(dTp_dRhub_fd, dTp_dRhub, rtol=1e-4, atol=1e-7)
 
     def test_dRtip1(self):
+
         dNp_dRtip = self.dNp["dRtip"]
         dTp_dRtip = self.dTp["dRtip"]
 
@@ -3895,6 +3954,7 @@ class TestGradientsNotRotating(unittest.TestCase):
         np.testing.assert_allclose(dTp_dRtip_fd, dTp_dRtip, rtol=1e-4, atol=1e-8)
 
     def test_dprecone1(self):
+
         dNp_dprecone = self.dNp["dprecone"]
         dTp_dprecone = self.dTp["dprecone"]
 
@@ -3935,6 +3995,7 @@ class TestGradientsNotRotating(unittest.TestCase):
         np.testing.assert_allclose(dTp_dprecone_fd, dTp_dprecone, rtol=1e-6, atol=1e-8)
 
     def test_dtilt1(self):
+
         dNp_dtilt = self.dNp["dtilt"]
         dTp_dtilt = self.dTp["dtilt"]
 
@@ -3975,6 +4036,7 @@ class TestGradientsNotRotating(unittest.TestCase):
         np.testing.assert_allclose(dTp_dtilt_fd, dTp_dtilt, rtol=1e-5, atol=1e-6)
 
     def test_dhubht1(self):
+
         dNp_dhubht = self.dNp["dhubHt"]
         dTp_dhubht = self.dTp["dhubHt"]
 
@@ -4015,6 +4077,7 @@ class TestGradientsNotRotating(unittest.TestCase):
         np.testing.assert_allclose(dTp_dhubht_fd, dTp_dhubht, rtol=1e-5, atol=1e-8)
 
     def test_dyaw1(self):
+
         dNp_dyaw = self.dNp["dyaw"]
         dTp_dyaw = self.dTp["dyaw"]
 
@@ -4055,6 +4118,7 @@ class TestGradientsNotRotating(unittest.TestCase):
         np.testing.assert_allclose(dTp_dyaw_fd, dTp_dyaw, rtol=1e-5, atol=1e-8)
 
     def test_dshear1(self):
+
         dNp_dshear = self.dNp["dshear"]
         dTp_dshear = self.dTp["dshear"]
 
@@ -4095,6 +4159,7 @@ class TestGradientsNotRotating(unittest.TestCase):
         np.testing.assert_allclose(dTp_dshear_fd, dTp_dshear, rtol=1e-5, atol=1e-8)
 
     def test_dazimuth1(self):
+
         dNp_dazimuth = self.dNp["dazimuth"]
         dTp_dazimuth = self.dTp["dazimuth"]
 
@@ -4135,6 +4200,7 @@ class TestGradientsNotRotating(unittest.TestCase):
         np.testing.assert_allclose(dTp_dazimuth_fd, dTp_dazimuth, rtol=1e-5, atol=1e-6)
 
     def test_dUinf1(self):
+
         dNp_dUinf = self.dNp["dUinf"]
         dTp_dUinf = self.dTp["dUinf"]
 
@@ -4179,6 +4245,7 @@ class TestGradientsNotRotating(unittest.TestCase):
     #
 
     def test_dpitch1(self):
+
         dNp_dpitch = self.dNp["dpitch"]
         dTp_dpitch = self.dTp["dpitch"]
 
@@ -4219,6 +4286,7 @@ class TestGradientsNotRotating(unittest.TestCase):
         np.testing.assert_allclose(dTp_dpitch_fd, dTp_dpitch, rtol=5e-5, atol=1e-6)
 
     def test_dprecurve1(self):
+
         precurve = np.linspace(1, 10, self.n)
         precurveTip = 10.1
         precone = 0.0
@@ -4291,6 +4359,7 @@ class TestGradientsNotRotating(unittest.TestCase):
         np.testing.assert_allclose(dTp_dprecurve_fd, dTp_dprecurve, rtol=3e-4, atol=1e-8)
 
     def test_dpresweep1(self):
+
         presweep = np.linspace(1, 10, self.n)
         presweepTip = 10.1
         precone = 0.0
@@ -4363,6 +4432,7 @@ class TestGradientsNotRotating(unittest.TestCase):
         np.testing.assert_allclose(dTp_dpresweep_fd, dTp_dpresweep, rtol=1e-5, atol=1e-8)
 
     def test_dprecurveTip1(self):
+
         precurve = np.linspace(1, 10, self.n)
         precurveTip = 10.1
         precone = 0.0
@@ -4431,6 +4501,7 @@ class TestGradientsNotRotating(unittest.TestCase):
         np.testing.assert_allclose(dTp_dprecurveTip_fd, 0.0, rtol=1e-4, atol=1e-8)
 
     def test_dpresweepTip1(self):
+
         presweep = np.linspace(1, 10, self.n)
         presweepTip = 10.1
         precone = 0.0
@@ -4501,6 +4572,7 @@ class TestGradientsNotRotating(unittest.TestCase):
 
 class TestGradientsFreestreamArray(unittest.TestCase):
     def setUp(self):
+
         # geometry
         self.Rhub = 1.5
         self.Rtip = 63.0
@@ -4646,6 +4718,7 @@ class TestGradientsFreestreamArray(unittest.TestCase):
         self.npts = len(self.Uinf)
 
     def test_dUinf2(self):
+
         dT_dUinf = self.dT["dUinf"]
         dY_dUinf = self.dY["dUinf"]
         dZ_dUinf = self.dZ["dUinf"]
@@ -4698,6 +4771,7 @@ class TestGradientsFreestreamArray(unittest.TestCase):
         np.testing.assert_allclose(dP_dUinf_fd, dP_dUinf, rtol=5e-5, atol=1e-8)
 
     def test_dUinf3(self):
+
         dCT_dUinf = self.dCT["dUinf"]
         dCY_dUinf = self.dCY["dUinf"]
         dCZ_dUinf = self.dCZ["dUinf"]
@@ -4750,6 +4824,7 @@ class TestGradientsFreestreamArray(unittest.TestCase):
         np.testing.assert_allclose(dCP_dUinf_fd, dCP_dUinf, rtol=5e-5, atol=1e-8)
 
     def test_dOmega2(self):
+
         dT_dOmega = self.dT["dOmega"]
         dY_dOmega = self.dY["dOmega"]
         dZ_dOmega = self.dZ["dOmega"]
@@ -4802,6 +4877,7 @@ class TestGradientsFreestreamArray(unittest.TestCase):
         np.testing.assert_allclose(dP_dOmega_fd, dP_dOmega, rtol=5e-5, atol=1e-8)
 
     def test_dOmega3(self):
+
         dCT_dOmega = self.dCT["dOmega"]
         dCY_dOmega = self.dCY["dOmega"]
         dCZ_dOmega = self.dCZ["dOmega"]
@@ -4854,6 +4930,7 @@ class TestGradientsFreestreamArray(unittest.TestCase):
         np.testing.assert_allclose(dCP_dOmega_fd, dCP_dOmega, rtol=5e-5, atol=1e-8)
 
     def test_dpitch2(self):
+
         dT_dpitch = self.dT["dpitch"]
         dY_dpitch = self.dY["dpitch"]
         dZ_dpitch = self.dZ["dpitch"]
@@ -4906,6 +4983,7 @@ class TestGradientsFreestreamArray(unittest.TestCase):
         np.testing.assert_allclose(dP_dpitch_fd, dP_dpitch, rtol=5e-5, atol=1e-8)
 
     def test_dpitch3(self):
+
         dCT_dpitch = self.dCT["dpitch"]
         dCY_dpitch = self.dCY["dpitch"]
         dCZ_dpitch = self.dCZ["dpitch"]
@@ -4960,6 +5038,7 @@ class TestGradientsFreestreamArray(unittest.TestCase):
 
 class TestGradients_RHub_Tip(unittest.TestCase):
     def setUp(self):
+
         # geometry
         self.Rhub = 1.5
         self.Rtip = 63.0
@@ -5115,6 +5194,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         self.npts = 1  # len(Uinf)
 
     def test_dr1(self):
+
         dNp_dr = self.dNp["dr"]
         dTp_dr = self.dTp["dr"]
         dNp_dr_fd = np.zeros((self.n, self.n))
@@ -5155,6 +5235,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dr_fd, dTp_dr, rtol=1e-4, atol=1e-8)
 
     def test_dr2(self):
+
         dT_dr = self.dT["dr"]
         dY_dr = self.dY["dr"]
         dZ_dr = self.dZ["dr"]
@@ -5225,6 +5306,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dr_fd, dP_dr, rtol=1e-3)  # , atol=1e-8)
 
     def test_dr3(self):
+
         dCT_dr = self.dCT["dr"]
         dCY_dr = self.dCY["dr"]
         dCZ_dr = self.dCZ["dr"]
@@ -5295,6 +5377,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dCP_dr_fd, dCP_dr, rtol=3e-4, atol=1e-7)
 
     def test_dchord1(self):
+
         dNp_dchord = self.dNp["dchord"]
         dTp_dchord = self.dTp["dchord"]
         dNp_dchord_fd = np.zeros((self.n, self.n))
@@ -5335,6 +5418,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dchord_fd, dTp_dchord, rtol=5e-5, atol=1e-8)
 
     def test_dchord2(self):
+
         dT_dchord = self.dT["dchord"]
         dY_dchord = self.dY["dchord"]
         dZ_dchord = self.dZ["dchord"]
@@ -5405,6 +5489,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dchord_fd, dP_dchord, rtol=7e-5, atol=1e-8)
 
     def test_dchord3(self):
+
         dCT_dchord = self.dCT["dchord"]
         dCY_dchord = self.dCY["dchord"]
         dCZ_dchord = self.dCZ["dchord"]
@@ -5475,6 +5560,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dCP_dchord_fd, dCP_dchord, rtol=7e-5, atol=1e-8)
 
     def test_dtheta1(self):
+
         dNp_dtheta = self.dNp["dtheta"]
         dTp_dtheta = self.dTp["dtheta"]
         dNp_dtheta_fd = np.zeros((self.n, self.n))
@@ -5515,6 +5601,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dtheta_fd, dTp_dtheta, rtol=1e-4, atol=1e-8)
 
     def test_dtheta2(self):
+
         dT_dtheta = self.dT["dtheta"]
         dY_dtheta = self.dY["dtheta"]
         dZ_dtheta = self.dZ["dtheta"]
@@ -5585,6 +5672,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dtheta_fd, dP_dtheta, rtol=7e-5, atol=1e-8)
 
     def test_dtheta3(self):
+
         dCT_dtheta = self.dCT["dtheta"]
         dCY_dtheta = self.dCY["dtheta"]
         dCZ_dtheta = self.dCZ["dtheta"]
@@ -5655,6 +5743,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dCP_dtheta_fd, dCP_dtheta, rtol=7e-5, atol=1e-8)
 
     def test_dRhub1(self):
+
         dNp_dRhub = self.dNp["dRhub"]
         dTp_dRhub = self.dTp["dRhub"]
 
@@ -5695,6 +5784,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dRhub_fd, dTp_dRhub, rtol=1e-4, atol=1e-6)
 
     def test_dRhub2(self):
+
         dT_dRhub = self.dT["dRhub"]
         dY_dRhub = self.dY["dRhub"]
         dZ_dRhub = self.dZ["dRhub"]
@@ -5765,6 +5855,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dRhub_fd, dP_dRhub, rtol=5e-5, atol=1e-8)
 
     def test_dRhub3(self):
+
         dCT_dRhub = self.dCT["dRhub"]
         dCY_dRhub = self.dCY["dRhub"]
         dCZ_dRhub = self.dCZ["dRhub"]
@@ -5835,6 +5926,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dCP_dRhub_fd, dCP_dRhub, rtol=5e-5, atol=1e-8)
 
     def test_dRtip1(self):
+
         dNp_dRtip = self.dNp["dRtip"]
         dTp_dRtip = self.dTp["dRtip"]
 
@@ -5875,6 +5967,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dRtip_fd, dTp_dRtip, rtol=1e-4, atol=1e-8)
 
     def test_dRtip2(self):
+
         dT_dRtip = self.dT["dRtip"]
         dY_dRtip = self.dY["dRtip"]
         dZ_dRtip = self.dZ["dRtip"]
@@ -5945,6 +6038,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dRtip_fd, dP_dRtip, rtol=5e-5, atol=1e-8)
 
     def test_dRtip3(self):
+
         dCT_dRtip = self.dCT["dRtip"]
         dCY_dRtip = self.dCY["dRtip"]
         dCZ_dRtip = self.dCZ["dRtip"]
@@ -6015,6 +6109,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dCP_dRtip_fd, dCP_dRtip, rtol=5e-5, atol=1e-8)
 
     def test_dprecone1(self):
+
         dNp_dprecone = self.dNp["dprecone"]
         dTp_dprecone = self.dTp["dprecone"]
 
@@ -6055,6 +6150,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dprecone_fd, dTp_dprecone, rtol=1e-5, atol=1e-7)
 
     def test_dprecone2(self):
+
         dT_dprecone = self.dT["dprecone"]
         dY_dprecone = self.dY["dprecone"]
         dZ_dprecone = self.dZ["dprecone"]
@@ -6125,6 +6221,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dprecone_fd, dP_dprecone, rtol=5e-5, atol=1e-8)
 
     def test_dprecone3(self):
+
         dCT_dprecone = self.dCT["dprecone"]
         dCY_dprecone = self.dCY["dprecone"]
         dCZ_dprecone = self.dCZ["dprecone"]
@@ -6195,6 +6292,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dCP_dprecone_fd, dCP_dprecone, rtol=5e-5, atol=1e-8)
 
     def test_dtilt1(self):
+
         dNp_dtilt = self.dNp["dtilt"]
         dTp_dtilt = self.dTp["dtilt"]
 
@@ -6235,6 +6333,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dtilt_fd, dTp_dtilt, rtol=1e-5, atol=1e-8)
 
     def test_dtilt2(self):
+
         dT_dtilt = self.dT["dtilt"]
         dY_dtilt = self.dY["dtilt"]
         dZ_dtilt = self.dZ["dtilt"]
@@ -6305,6 +6404,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dtilt_fd, dP_dtilt, rtol=5e-5, atol=1e-8)
 
     def test_dtilt3(self):
+
         dCT_dtilt = self.dCT["dtilt"]
         dCY_dtilt = self.dCY["dtilt"]
         dCZ_dtilt = self.dCZ["dtilt"]
@@ -6375,6 +6475,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dCP_dtilt_fd, dCP_dtilt, rtol=5e-5, atol=1e-8)
 
     def test_dhubht1(self):
+
         dNp_dhubht = self.dNp["dhubHt"]
         dTp_dhubht = self.dTp["dhubHt"]
 
@@ -6415,6 +6516,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dhubht_fd, dTp_dhubht, rtol=1e-5, atol=1e-8)
 
     def test_dhubht2(self):
+
         dT_dhubht = self.dT["dhubHt"]
         dY_dhubht = self.dY["dhubHt"]
         dZ_dhubht = self.dZ["dhubHt"]
@@ -6485,6 +6587,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dhubht_fd, dP_dhubht, rtol=5e-5, atol=1e-8)
 
     def test_dhubht3(self):
+
         dCT_dhubht = self.dCT["dhubHt"]
         dCY_dhubht = self.dCY["dhubHt"]
         dCZ_dhubht = self.dCZ["dhubHt"]
@@ -6555,6 +6658,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dCP_dhubht_fd, dCP_dhubht, rtol=5e-5, atol=1e-8)
 
     def test_dyaw1(self):
+
         dNp_dyaw = self.dNp["dyaw"]
         dTp_dyaw = self.dTp["dyaw"]
 
@@ -6595,6 +6699,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dyaw_fd, dTp_dyaw, rtol=1e-5, atol=1e-8)
 
     def test_dyaw2(self):
+
         dT_dyaw = self.dT["dyaw"]
         dY_dyaw = self.dY["dyaw"]
         dZ_dyaw = self.dZ["dyaw"]
@@ -6665,6 +6770,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dyaw_fd, dP_dyaw, rtol=5e-5, atol=1e-8)
 
     def test_dyaw3(self):
+
         dCT_dyaw = self.dCT["dyaw"]
         dCY_dyaw = self.dCY["dyaw"]
         dCZ_dyaw = self.dCZ["dyaw"]
@@ -6735,6 +6841,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dCP_dyaw_fd, dCP_dyaw, rtol=5e-5, atol=1e-8)
 
     def test_dshear1(self):
+
         dNp_dshear = self.dNp["dshear"]
         dTp_dshear = self.dTp["dshear"]
 
@@ -6775,6 +6882,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dshear_fd, dTp_dshear, rtol=1e-5, atol=1e-8)
 
     def test_dshear2(self):
+
         dT_dshear = self.dT["dshear"]
         dY_dshear = self.dY["dshear"]
         dZ_dshear = self.dZ["dshear"]
@@ -6845,6 +6953,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dshear_fd, dP_dshear, rtol=5e-5, atol=1e-8)
 
     def test_dshear3(self):
+
         dCT_dshear = self.dCT["dshear"]
         dCY_dshear = self.dCY["dshear"]
         dCZ_dshear = self.dCZ["dshear"]
@@ -6915,6 +7024,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dCP_dshear_fd, dCP_dshear, rtol=5e-5, atol=1e-8)
 
     def test_dazimuth1(self):
+
         dNp_dazimuth = self.dNp["dazimuth"]
         dTp_dazimuth = self.dTp["dazimuth"]
 
@@ -6936,6 +7046,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dazimuth_fd, dTp_dazimuth, rtol=1e-5, atol=1e-6)
 
     def test_dUinf1(self):
+
         dNp_dUinf = self.dNp["dUinf"]
         dTp_dUinf = self.dTp["dUinf"]
 
@@ -6957,6 +7068,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dUinf_fd, dTp_dUinf, rtol=1e-5, atol=1e-6)
 
     def test_dUinf2(self):
+
         dT_dUinf = self.dT["dUinf"]
         dY_dUinf = self.dY["dUinf"]
         dZ_dUinf = self.dZ["dUinf"]
@@ -7008,6 +7120,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dUinf_fd, dP_dUinf, rtol=5e-5, atol=1e-8)
 
     def test_dUinf3(self):
+
         dCT_dUinf = self.dCT["dUinf"]
         dCY_dUinf = self.dCY["dUinf"]
         dCZ_dUinf = self.dCZ["dUinf"]
@@ -7059,6 +7172,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dCP_dUinf_fd, dCP_dUinf, rtol=5e-5, atol=1e-8)
 
     def test_dOmega1(self):
+
         dNp_dOmega = self.dNp["dOmega"]
         dTp_dOmega = self.dTp["dOmega"]
 
@@ -7080,6 +7194,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dOmega_fd, dTp_dOmega, rtol=1e-5, atol=1e-6)
 
     def test_dOmega2(self):
+
         dT_dOmega = self.dT["dOmega"]
         dY_dOmega = self.dY["dOmega"]
         dZ_dOmega = self.dZ["dOmega"]
@@ -7131,6 +7246,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dOmega_fd, dP_dOmega, rtol=5e-5, atol=1e-8)
 
     def test_dOmega3(self):
+
         dCT_dOmega = self.dCT["dOmega"]
         dCY_dOmega = self.dCY["dOmega"]
         dCZ_dOmega = self.dCZ["dOmega"]
@@ -7182,6 +7298,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dCP_dOmega_fd, dCP_dOmega, rtol=5e-5, atol=1e-8)
 
     def test_dpitch1(self):
+
         dNp_dpitch = self.dNp["dpitch"]
         dTp_dpitch = self.dTp["dpitch"]
 
@@ -7203,6 +7320,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dpitch_fd, dTp_dpitch, rtol=5e-5, atol=1e-6)
 
     def test_dpitch2(self):
+
         dT_dpitch = self.dT["dpitch"]
         dY_dpitch = self.dY["dpitch"]
         dZ_dpitch = self.dZ["dpitch"]
@@ -7254,6 +7372,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dpitch_fd, dP_dpitch, rtol=5e-5, atol=1e-8)
 
     def test_dpitch3(self):
+
         dCT_dpitch = self.dCT["dpitch"]
         dCY_dpitch = self.dCY["dpitch"]
         dCZ_dpitch = self.dCZ["dpitch"]
@@ -7305,6 +7424,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dCP_dpitch_fd, dCP_dpitch, rtol=5e-5, atol=1e-8)
 
     def test_dprecurve1(self):
+
         precurve = np.linspace(1, 10, self.n)
         precurveTip = precurve[-1]
         precone = 0.0
@@ -7379,6 +7499,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dprecurve_fd, dTp_dprecurve, rtol=3e-4, atol=1e-8)
 
     def test_dprecurve2(self):
+
         precurve = np.linspace(1, 10, self.n)
         precurveTip = precurve[-1]
         precone = 0.0
@@ -7494,6 +7615,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dprecurve_fd, dP_dprecurve, rtol=3e-4, atol=1e-8)
 
     def test_dprecurve3(self):
+
         precurve = np.linspace(1, 10, self.n)
         precurveTip = precurve[-1]
         precone = 0.0
@@ -7609,6 +7731,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dCP_dprecurve_fd, dCP_dprecurve, rtol=3e-4, atol=1e-8)
 
     def test_dpresweep1(self):
+
         presweep = np.linspace(1, 10, self.n)
         presweepTip = presweep[-1]
         precone = 0.0
@@ -7683,6 +7806,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dpresweep_fd, dTp_dpresweep, rtol=1e-5, atol=1e-8)
 
     def test_dpresweep2(self):
+
         presweep = np.linspace(1, 10, self.n)
         presweepTip = presweep[-1]
         precone = 0.0
@@ -7798,6 +7922,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dpresweep_fd, dP_dpresweep, rtol=3e-4, atol=1e-8)
 
     def test_dpresweep3(self):
+
         presweep = np.linspace(1, 10, self.n)
         presweepTip = presweep[-1]
         precone = 0.0
@@ -7913,6 +8038,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dCP_dpresweep_fd, dCP_dpresweep, rtol=3e-4, atol=1e-8)
 
     def test_dprecurveTip1(self):
+
         precurve = np.linspace(1, 10, self.n)
         precurveTip = precurve[-1]
         precone = 0.0
@@ -7979,6 +8105,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dprecurveTip_fd, 0.0, rtol=1e-4, atol=1e-8)
 
     def test_dprecurveTip2(self):
+
         precurve = np.linspace(1, 10, self.n)
         precurveTip = precurve[-1]
         precone = 0.0
@@ -8092,6 +8219,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dprecurveTip_fd, dP_dprecurveTip, rtol=1e-4, atol=1e-8)
 
     def test_dprecurveTip3(self):
+
         precurve = np.linspace(1, 10, self.n)
         precurveTip = precurve[-1]
         precone = 0.0
@@ -8206,6 +8334,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dCP_dprecurveTip_fd, dCP_dprecurveTip, rtol=1e-4, atol=1e-8)
 
     def test_dpresweepTip1(self):
+
         presweep = np.linspace(1, 10, self.n)
         presweepTip = presweep[-1]
         precone = 0.0
@@ -8272,6 +8401,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dTp_dpresweepTip_fd, 0.0, rtol=1e-4, atol=1e-8)
 
     def test_dpresweepTip2(self):
+
         presweep = np.linspace(1, 10, self.n)
         presweepTip = presweep[-1]
         precone = 0.0
@@ -8386,6 +8516,7 @@ class TestGradients_RHub_Tip(unittest.TestCase):
         np.testing.assert_allclose(dP_dpresweepTip_fd, dP_dpresweepTip, rtol=1e-4, atol=1e-8)
 
     def test_dpresweepTip3(self):
+
         presweep = np.linspace(1, 10, self.n)
         presweepTip = presweep[-1]
         precone = 0.0

@@ -85,6 +85,7 @@ class Line:
         filename = dirname + rootname + sep + strtype + str(self.number) + ".out"
 
         if path.exists(filename):
+
             # try:
 
             # load time series data
@@ -208,6 +209,7 @@ class Line:
 
         # special temporary case to draw a rod for visualization. This assumes the rod end points have already been set somehow
         if self.qs == 1 and self.isRod > 0:
+
             # make points for appropriately sized cylinder
             d = self.type["d_vol"]
             Xs, Ys, Zs = makeTower(
@@ -229,6 +231,7 @@ class Line:
 
         # if a quasi-static analysis, just call the catenary function to return the line coordinates
         elif self.qs == 1:
+
             depth = self.sys.depth
 
             dr = self.rB - self.rA
@@ -256,6 +259,7 @@ class Line:
 
             # If EA is found in the line properties we will run the original catenary function
             if "EA" in self.type:
+
                 try:
                     (fAH, fAV, fBH, fBV, info) = catenary(
                         LH,
@@ -288,11 +292,13 @@ class Line:
 
         # otherwise, count on read-in time-series data
         else:
+
             # figure out what time step to use
             ts = self.getTimestep(Time)
 
             # drawing rods
             if self.isRod > 0:
+
                 k1 = (
                     np.array(
                         [
@@ -327,6 +333,7 @@ class Line:
 
             # drawing lines
             else:
+
                 # handle whether or not there is tension data
                 try:  # use average to go from segment tension to node tensions <<< can skip this once MD is updated to output node tensions
                     Te = 0.5 * (np.append(self.Te[ts, 0], self.Te[ts, :]) + np.append(self.Te[ts, :], self.Te[ts, -1]))
@@ -396,6 +403,7 @@ class Line:
         linebit = []  # make empty list to hold plotted lines, however many there are
 
         if self.isRod > 0:
+
             Xs, Ys, Zs, Te = self.getLineCoords(Time)
 
             # apply any 3D to 2D transformation here to provide desired viewing angle
@@ -415,6 +423,7 @@ class Line:
 
         # drawing lines...
         else:
+
             if self.qs == 1:
                 Xs, Ys, Zs, tensions = self.getLineCoords(Time)
             elif self.qs == 0:
@@ -491,6 +500,7 @@ class Line:
         linebit = []  # make empty list to hold plotted lines, however many there are
 
         if self.isRod > 0:
+
             if color == None:
                 color = [0.3, 0.3, 0.3]  # if no color provided, default to dark grey rather than rainbow rods
 
@@ -515,6 +525,7 @@ class Line:
 
         # drawing lines...
         else:
+
             if self.qs == 1:  # returns the node positions and tensions of the line, doesn't matter what time
                 Xs, Ys, Zs, tensions = self.getLineCoords(Time)
             elif self.qs == 0:  # returns the node positions and time data at the given time
@@ -564,9 +575,11 @@ class Line:
         linebit = self.linebit
 
         if self.isRod > 0:
+
             Xs, Ys, Zs, Ts = self.getLineCoords(Time)
 
             for i in range(int(len(Xs) / 2 - 1)):
+
                 linebit[3 * i][0].set_data(
                     Xs[2 * i : 2 * i + 2], Ys[2 * i : 2 * i + 2]
                 )  # side edges (x and y coordinates)
@@ -578,6 +591,7 @@ class Line:
 
         # drawing lines...
         else:
+
             Xs, Ys, Zs, Ts = self.getLineCoords(Time)
 
             if colortension:

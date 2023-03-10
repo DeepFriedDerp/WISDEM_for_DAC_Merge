@@ -1,4 +1,4 @@
-.. _financese:
+.. _financese: 
 
 Plant_FinanceSE
 ================
@@ -16,3 +16,5 @@ Plant_FinanceSE
     intro
     documentation
     theory
+
+

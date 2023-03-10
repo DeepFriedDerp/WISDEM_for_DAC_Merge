@@ -76,6 +76,7 @@ class TestMooring(unittest.TestCase):
         self.assertAlmostEqual(self.outputs["mooring_cost"], 6 * 270 * 0.4 + 6 * 10)
 
     def testRunMap_MoorProps(self):
+
         opt = {}
         opt["n_attach"] = 3
         opt["n_anchors"] = 6

@@ -21,6 +21,7 @@ base = {
 
 @pytest.mark.parametrize("depth", range(10, 1000, 100))
 def test_depth_sweep(depth):
+
     config = deepcopy(base)
     config["site"]["depth"] = depth
 
@@ -33,6 +34,7 @@ def test_depth_sweep(depth):
 
 @pytest.mark.parametrize("rating", range(3, 15, 1))
 def test_rating_sweeip(rating):
+
     config = deepcopy(base)
     config["turbine"]["turbine_rating"] = rating
 
@@ -44,6 +46,7 @@ def test_rating_sweeip(rating):
 
 
 def test_drag_embedment_fixed_length():
+
     m = MooringSystemDesign(base)
     m.run()
 
@@ -72,6 +75,7 @@ def test_drag_embedment_fixed_length():
 
 
 def test_custom_num_lines():
+
     config = deepcopy(base)
     config["mooring_system_design"] = {"num_lines": 5}
 

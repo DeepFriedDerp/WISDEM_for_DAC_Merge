@@ -9,11 +9,10 @@ Copyright (c)  NREL. All rights reserved.
 
 from __future__ import print_function
 
-import os
-import copy
-import math
-
 import numpy as np
+import math
+import copy
+import os
 
 # from rotorstruc import SectionStrucInterface
 # from wisdem.common import sind, cosd
@@ -22,10 +21,12 @@ from wisdem.rotorse._precomp import precomp as _precomp
 
 
 def web_loc(r, chord, le, ib_idx, ob_idx, ib_webc, ob_webc):
+
     n = len(r)
     loc = np.zeros(n)
 
     for i in range(n):
+
         if i < ib_idx or i > ob_idx:
             loc[i] = -1
         else:
@@ -264,6 +265,7 @@ class PreComp:
         )
 
     def criticalStrainLocations(self, sector_idx_strain_ss, sector_idx_strain_ps):
+
         n = len(self.r)
 
         # find location of max thickness on airfoil
@@ -323,6 +325,7 @@ class PreComp:
         eps_crit = np.zeros(nsec)
 
         for i in range(nsec):
+
             cs = self.upperCS[i]  # TODO: lower surface may be the compression one
             sector_idx = sector_idx_array[i]
 
@@ -330,6 +333,7 @@ class PreComp:
                 eps_crit[i] = 0.0
 
             else:
+
                 # chord-wise length of sector
                 sector_length = chord[i] * (cs.loc[sector_idx + 1] - cs.loc[sector_idx])
 
@@ -655,6 +659,7 @@ class CompositeSection:
         return Tinv @ Q @ T12
 
     def _preCompFormat(self):
+
         n = len(self.theta)
         n_lamina = np.zeros(n)
 
@@ -1048,6 +1053,7 @@ class Profile:
         return max(self.yu - self.yl)
 
     def set_tc(self, new_tc):
+
         factor = new_tc / self.tc
 
         self.yu *= factor
@@ -1072,12 +1078,14 @@ class PreCompWriter:
             os.makedirs(dir_out)
 
     def execute(self):
+
         flist_layup = self.writePreCompLayup()
         flist_profile = self.writePreCompProfile()
         self.writePreCompMaterials()
         self.writePreCompInput(flist_layup, flist_profile)
 
     def writePreCompMaterials(self):
+
         text = []
         text.append("\n")
         text.append("Mat_Id     E1           E2          G12       Nu12     Density      Mat_Name\n")
@@ -1126,6 +1134,7 @@ class PreCompWriter:
             return text
 
         for idx, (lower_i, upper_i, webs_i) in enumerate(zip(self.lower, self.upper, self.webs)):
+
             text = []
             text.append("Composite laminae lay-up inside the blade section\n")
             text.append("\n")
@@ -1205,7 +1214,9 @@ class PreCompWriter:
         return f_out
 
     def writePreCompInput(self, flist_layup, flist_profile):
+
         for idx in range(0, len(flist_layup)):
+
             chord = self.chord[idx]
             twist = self.twist[idx]
             p_le = self.p_le[idx]
@@ -1261,6 +1272,7 @@ class PreCompWriter:
 
 
 if __name__ == "__main__":
+
     import os
 
     # geometry
@@ -1581,6 +1593,7 @@ if __name__ == "__main__":
     # web2 = web_loc(r_str, chord_str, le_str, ib_idx, ob_idx, ib_webc, ob_webc)
 
     for i in range(ncomp):
+
         webLoc = []
         if web1[i] != -1:
             webLoc.append(web1[i])

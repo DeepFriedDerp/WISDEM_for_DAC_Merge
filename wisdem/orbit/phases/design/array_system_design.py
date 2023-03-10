@@ -516,6 +516,7 @@ class ArraySystemDesign(CableSystem):
 
         for i, row in enumerate(self.sections_cables):
             for cable, width in zip(max_string, string_widths):
+
                 ix_to_plot = np.where(row == cable)[0]
                 if ix_to_plot.size == 0:
                     continue
@@ -733,6 +734,7 @@ class CustomArraySystemDesign(ArraySystemDesign):
         export_library_specs("cables", save_name, rows, file_ext="csv")
 
     def _format_windfarm_data(self):
+
         # Separate the OSS data where substaion_id is equal to id
         substation_filter = self.location_data.substation_id == self.location_data.id
         oss = self.location_data[substation_filter].copy()
@@ -920,6 +922,7 @@ class CustomArraySystemDesign(ArraySystemDesign):
             self.sections_distance = self._compute_haversine_distance()
 
     def run(self):
+
         self._initialize_cables()
         self.create_strings()
         self._initialize_custom_data()

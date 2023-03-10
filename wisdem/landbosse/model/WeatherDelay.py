@@ -151,6 +151,7 @@ class WeatherDelay:
         # to a small set.
 
         if np.any(wind_delays):
+
             # Holds the list of delay durations
             delay_durations = []
 

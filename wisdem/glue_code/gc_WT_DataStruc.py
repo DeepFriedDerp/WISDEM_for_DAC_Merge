@@ -3,9 +3,8 @@ import logging
 
 import numpy as np
 import openmdao.api as om
-from scipy.interpolate import PchipInterpolator, interp1d
-
 import wisdem.moorpy.MoorProps as mp
+from scipy.interpolate import PchipInterpolator, interp1d
 from wisdem.ccblade.Polar import Polar
 from wisdem.commonse.utilities import arc_length, arc_length_deriv
 from wisdem.rotorse.parametrize_rotor import ComputeReynolds, ParametrizeBladeAero, ParametrizeBladeStruct
@@ -877,10 +876,10 @@ class Compute_Blade_Outer_Shape_BEM(om.ExplicitComponent):
         rotorse_options = self.options["rotorse_options"]
         n_af_span = rotorse_options["n_af_span"]
         self.n_span = n_span = rotorse_options["n_span"]
-        if "n_te_flaps" in rotorse_options.keys():
-            n_te_flaps = rotorse_options["n_te_flaps"]
+        if "n_dac" in rotorse_options.keys():
+            n_dac = rotorse_options["n_dac"]
         else:
-            n_te_flaps = 0
+            n_dac = 0
 
         self.add_input(
             "s_default",
@@ -910,12 +909,12 @@ class Compute_Blade_Outer_Shape_BEM(om.ExplicitComponent):
 
         self.add_input(
             "span_end",
-            val=np.zeros(n_te_flaps),
+            val=np.zeros(n_dac),
             desc="1D array of the positions along blade span where something (a DAC device?) starts and we want a grid point. Only values between 0 and 1 are meaningful.",
         )
         self.add_input(
             "span_ext",
-            val=np.zeros(n_te_flaps),
+            val=np.zeros(n_dac),
             desc="1D array of the extensions along blade span where something (a DAC device?) lives and we want a grid point. Only values between 0 and 1 are meaningful.",
         )
 
@@ -946,6 +945,7 @@ class Compute_Blade_Outer_Shape_BEM(om.ExplicitComponent):
         )
 
     def compute(self, inputs, outputs):
+
         # If devices are defined along span, manipulate the grid s to always have a grid point where it is needed, and reinterpolate the blade quantities, namely chord, twist, pitch axis, and reference axis
         if len(inputs["span_end"]) > 0:
             nd_span_orig = np.linspace(0.0, 1.0, self.n_span)
@@ -962,21 +962,19 @@ class Compute_Blade_Outer_Shape_BEM(om.ExplicitComponent):
 
             # Account for start and end positions
             if inputs["span_end"] >= 0.98:
-                flap_start = 0.98 - inputs["span_ext"]
-                flap_end = 0.98
+                dac_start = 0.98 - inputs["span_ext"]
+                dac_end = 0.98
                 # print("WARNING: span_end point reached limits and was set to r/R = 0.98")
             else:
-                flap_start = inputs["span_end"] - inputs["span_ext"]
-                flap_end = inputs["span_end"]
+                dac_start = inputs["span_end"] - inputs["span_ext"]
+                dac_end = inputs["span_end"]
 
-            idx_flap_start = np.where(np.abs(nd_span_orig - flap_start) == (np.abs(nd_span_orig - flap_start)).min())[
-                0
-            ][0]
-            idx_flap_end = np.where(np.abs(nd_span_orig - flap_end) == (np.abs(nd_span_orig - flap_end)).min())[0][0]
-            if idx_flap_start == idx_flap_end:
-                idx_flap_end += 1
-            outputs["s"][idx_flap_start] = flap_start
-            outputs["s"][idx_flap_end] = flap_end
+            idx_dac_start = np.where(np.abs(nd_span_orig - dac_start) == (np.abs(nd_span_orig - dac_start)).min())[0][0]
+            idx_dac_end = np.where(np.abs(nd_span_orig - dac_end) == (np.abs(nd_span_orig - dac_end)).min())[0][0]
+            if idx_dac_start == idx_dac_end:
+                idx_dac_end += 1
+            outputs["s"][idx_dac_start] = dac_start
+            outputs["s"][idx_dac_end] = dac_end
             outputs["chord"] = np.interp(outputs["s"], nd_span_orig, chord_orig)
             outputs["twist"] = np.interp(outputs["s"], nd_span_orig, twist_orig)
             outputs["pitch_axis"] = np.interp(outputs["s"], nd_span_orig, pitch_axis_orig)
@@ -1005,9 +1003,7 @@ class Blade_Interp_Airfoils(om.ExplicitComponent):
         self.n_af = n_af = rotorse_options["n_af"]  # Number of airfoils
         self.n_aoa = n_aoa = rotorse_options["n_aoa"]  # Number of angle of attacks
         self.n_Re = n_Re = rotorse_options["n_Re"]  # Number of Reynolds, so far hard set at 1
-        self.n_tab = n_tab = rotorse_options[
-            "n_tab"
-        ]  # Number of tabulated data. For distributed aerodynamic control this could be > 1
+        self.n_tab = n_tab = rotorse_options["n_tab"]  # Number of tabulated data. For distributed aerodynamic control this could be > 1
         self.n_xy = n_xy = rotorse_options["n_xy"]  # Number of coordinate points to describe the airfoil geometry
         self.af_used = rotorse_options["af_used"]  # Names of the airfoils adopted along blade span
 
@@ -1096,6 +1092,7 @@ class Blade_Interp_Airfoils(om.ExplicitComponent):
         )
 
     def compute(self, inputs, outputs, discrete_inputs, discrete_outputs):
+
         # Reconstruct the blade relative thickness along span with a pchip
         r_thick_used = np.zeros(self.n_af_span)
         ac_used = np.zeros(self.n_af_span)
@@ -1487,6 +1484,7 @@ class Blade_Lofted_Shape(om.ExplicitComponent):
         )
 
     def compute(self, inputs, outputs):
+
         for i in range(self.n_span):
             x = inputs["coord_xy_dim"][i, :, 0]
             y = inputs["coord_xy_dim"][i, :, 1]
@@ -1845,6 +1843,7 @@ class Compute_Blade_Internal_Structure_2D_FEM(om.ExplicitComponent):
         # self.declare_partials('web_start_nd', ['coord_xy_dim', 'twist'], method='fd')
 
     def compute(self, inputs, outputs, discrete_inputs, discrete_outputs):
+
         # Initialize temporary arrays for the outputs
         web_rotation = np.zeros((self.n_webs, self.n_span))
         layer_rotation = np.zeros((self.n_layers, self.n_span))
@@ -1873,6 +1872,7 @@ class Compute_Blade_Internal_Structure_2D_FEM(om.ExplicitComponent):
 
             # Loop through the webs and compute non-dimensional start and end positions along the profile
             for j in range(self.n_webs):
+
                 offset = inputs["web_offset_y_pa_yaml"][j, i]
                 # Geometry checks on webs
                 if offset < ratio_Websmax * (-chord * p_le_i) or offset > ratio_Websmax * (chord * (1.0 - p_le_i)):
@@ -2814,6 +2814,7 @@ class ComputeMaterialsProperties(om.ExplicitComponent):
         self.options.declare("composites", default=True)
 
     def setup(self):
+
         mat_init_options = self.options["mat_init_options"]
         self.n_mat = n_mat = mat_init_options["n_mat"]
 
@@ -2876,6 +2877,7 @@ class ComputeMaterialsProperties(om.ExplicitComponent):
         )
 
     def compute(self, inputs, outputs, discrete_inputs, discrete_outputs):
+
         density_resin = 0.0
         for i in range(self.n_mat):
             if discrete_inputs["name"][i] == "resin":
@@ -2892,6 +2894,7 @@ class ComputeMaterialsProperties(om.ExplicitComponent):
 
         for i in range(self.n_mat):
             if discrete_inputs["component_id"][i] > 1:  # It's a composite
+
                 # Formula to estimate the fiber volume fraction fvf from the laminate and the fiber densities
                 fvf[i] = (inputs["rho"][i] - density_resin) / (inputs["rho_fiber"][i] - density_resin)
                 if inputs["fvf_from_yaml"][i] > 0.0:

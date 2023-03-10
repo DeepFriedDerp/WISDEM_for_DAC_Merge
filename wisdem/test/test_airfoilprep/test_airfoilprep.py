@@ -2,7 +2,6 @@ import unittest
 from math import pi
 
 import numpy as np
-
 from wisdem.airfoilprep import Polar, Airfoil
 
 
@@ -244,6 +243,7 @@ class TestBlend(unittest.TestCase):
         self.polar2 = Polar(Re, alpha, cl, cd, cm)
 
     def test_blend1(self):
+
         polar3 = self.polar1.blend(self.polar2, 0.5)
 
         alpha_blend = [
@@ -366,6 +366,7 @@ class TestBlend(unittest.TestCase):
         np.testing.assert_allclose(cm3, cm_blend, atol=1e-3)
 
     def test_blend1_w_airfoil(self):
+
         af1 = Airfoil([self.polar1])
         af2 = Airfoil([self.polar2])
         af3 = af1.blend(af2, 0.5)
@@ -491,6 +492,7 @@ class TestBlend(unittest.TestCase):
         np.testing.assert_allclose(cm3, cm_blend, atol=1e-3)
 
     def test_blend2(self):
+
         polar3 = self.polar1.blend(self.polar2, 0.7)
 
         alpha_blend = [
@@ -613,6 +615,7 @@ class TestBlend(unittest.TestCase):
         np.testing.assert_allclose(cm3, cm_blend, atol=1e-3)
 
     def test_blend3(self):
+
         polar3 = self.polar1.blend(self.polar2, 0.2)
 
         alpha_blend = [
@@ -1551,6 +1554,7 @@ class Test3DStall(unittest.TestCase):
 
 class TestExtrap(unittest.TestCase):
     def setUp(self):
+
         alpha = [
             -10.1,
             -8.2,
@@ -1649,6 +1653,7 @@ class TestExtrap(unittest.TestCase):
         self.polar2 = Polar(Re, alpha, cl, cd, cm_zeros)
 
     def test_extrap1(self):
+
         cdmax = 1.29
         newpolar = self.polar.extrapolate(cdmax=cdmax)
 
@@ -1888,6 +1893,7 @@ class TestExtrap(unittest.TestCase):
         np.testing.assert_allclose(cm, cm_extrap, atol=5e-3)
 
     def test_extrap1_w_airfoil(self):
+
         cdmax = 1.29
         af = Airfoil([self.polar2])
         newaf = af.extrapolate(cdmax=cdmax)
@@ -2074,6 +2080,7 @@ class TestExtrap(unittest.TestCase):
         np.testing.assert_allclose(cm, cm_extrap, atol=5e-3)
 
     def test_extrap2(self):
+
         cdmax = 1.0
         newpolar = self.polar.extrapolate(cdmax=cdmax)
 
@@ -2313,6 +2320,7 @@ class TestExtrap(unittest.TestCase):
         np.testing.assert_allclose(cm, cm_extrap, atol=5e-3)
 
     def test_extrap3(self):
+
         cdmax = 1.5
         newpolar = self.polar.extrapolate(cdmax)
 

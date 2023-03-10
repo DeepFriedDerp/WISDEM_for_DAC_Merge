@@ -1,5 +1,7 @@
 import copy
 
+from sortedcontainers import SortedDict
+
 import numpy as np
 import openmdao.api as om
 from sortedcontainers import SortedDict
@@ -319,7 +321,6 @@ class DiscretizationYAML(om.ExplicitComponent):
                 E_param[k, :] = inputs["E_user"]
             else:
                 E_param[k, :] = E[imat]
-
             G_param[k, :] = G[imat]
             sigy_param[k, :] = sigy[imat]
             sigu_param[k, :] = sigu[imat]
@@ -1064,6 +1065,7 @@ class MemberComplex(om.ExplicitComponent):
         self.sections[s_new] = copy.copy(self.sections[keys_orig[idx]])
 
     def insert_section(self, s0, s1, cross_section0):
+
         idx0 = self.sections.bisect_left(s0)
         idx1 = self.sections.bisect_left(s1)
         keys_orig = self.sections.keys()

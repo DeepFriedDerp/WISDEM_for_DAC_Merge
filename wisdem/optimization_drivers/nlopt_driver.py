@@ -266,6 +266,7 @@ class NLoptDriver(Driver):
                 meta_low = meta["lower"]
                 meta_high = meta["upper"]
                 for j in range(size):
+
                     if isinstance(meta_low, np.ndarray):
                         p_low = meta_low[j]
                     else:
@@ -313,6 +314,7 @@ class NLoptDriver(Driver):
                 # because it's easier to defined each
                 # constraint by index.
                 for j in range(size):
+
                     # Equality constraints are added as two inequality constraints
                     if equals is not None:
                         args = [name, False, j]
@@ -420,6 +422,7 @@ class NLoptDriver(Driver):
         f_new = 1e10
 
         try:
+
             # Pass in new parameters
             i = 0
             for name, meta in self._designvars.items():
@@ -452,7 +455,7 @@ class NLoptDriver(Driver):
                     for k in self._grad_cache.keys():
                         val = self._grad_cache[k].flatten()
                         temp = np.r_[temp, val]
-                    self._grad_cache = temp.reshape((-1, grad.size))
+                    self._grad_cache = temp.reshape((-1,grad.size))
                 grad[:] = self._grad_cache[0, :]
 
         except Exception as msg:

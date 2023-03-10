@@ -18,6 +18,7 @@ class Orbit(om.Group):
         self.options.declare("jacket_legs", default=0)
 
     def setup(self):
+
         # Define all input variables from all models
         self.set_input_defaults("wtiv", "example_wtiv")
         self.set_input_defaults("feeder", "example_feeder")
@@ -434,6 +435,7 @@ class OrbitWisdem(om.ExplicitComponent):
         return config
 
     def compute(self, inputs, outputs, discrete_inputs, discrete_outputs):
+
         config = self.compile_orbit_config_file(inputs, outputs, discrete_inputs, discrete_outputs)
 
         project = ProjectManager(config)

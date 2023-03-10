@@ -739,6 +739,7 @@ class PPI:
 
 
 def example():
+
     # test cases
 
     sy = 2002
@@ -755,4 +756,5 @@ def example():
 
 
 if __name__ == "__main__":
+
     example()

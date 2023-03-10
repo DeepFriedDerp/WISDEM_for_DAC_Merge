@@ -67,6 +67,7 @@ def set_common(prob, opt):
 
 class TestGroup(unittest.TestCase):
     def testDirectDrive_withGen(self):
+
         opt = {}
         opt["WISDEM"] = {}
         opt["WISDEM"]["n_dlc"] = 1
@@ -170,6 +171,7 @@ class TestGroup(unittest.TestCase):
         self.assertGreater(prob["drivetrain_damping_coefficient"], 1e7)
 
     def testDirectDrive_withSimpleGen(self):
+
         opt = {}
         opt["WISDEM"] = {}
         opt["WISDEM"]["n_dlc"] = 1
@@ -237,6 +239,7 @@ class TestGroup(unittest.TestCase):
         self.assertGreater(prob["drivetrain_damping_coefficient"], 1e7)
 
     def testGeared_withGen(self):
+
         opt = {}
         opt["WISDEM"] = {}
         opt["WISDEM"]["n_dlc"] = 1
@@ -364,6 +367,7 @@ class TestGroup(unittest.TestCase):
         self.assertGreater(prob["drivetrain_damping_coefficient"], 1e7)
 
     def testGeared_withSimpleGen(self):
+
         opt = {}
         opt["WISDEM"] = {}
         opt["WISDEM"]["n_dlc"] = 1

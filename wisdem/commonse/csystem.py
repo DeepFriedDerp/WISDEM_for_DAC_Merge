@@ -8,7 +8,6 @@ Copyright (c) NREL. All rights reserved.
 """
 
 from __future__ import print_function
-
 import numpy as np
 
 
@@ -416,6 +415,7 @@ class DirectionVector(object):
         return dx, dy, dz
 
     def cross_deriv_array(self, other, namea="a", nameb="b"):
+
         # c = a X b
         a = self
         b = other

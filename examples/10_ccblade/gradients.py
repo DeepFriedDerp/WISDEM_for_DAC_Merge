@@ -1,11 +1,11 @@
 # 1 ---------
 
-from math import pi
-
 import numpy as np
+from math import pi
 import matplotlib.pyplot as plt
 
-from wisdem.ccblade.ccblade import CCBlade, CCAirfoil
+from wisdem.ccblade.ccblade import CCAirfoil, CCBlade
+
 
 # geometry
 Rhub = 1.5

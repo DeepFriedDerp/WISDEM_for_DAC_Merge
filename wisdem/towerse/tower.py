@@ -259,6 +259,7 @@ class TowerFrame(om.ExplicitComponent):
         self.add_output("turbine_M", val=np.zeros((3, nLC)), units="N*m")
 
     def compute(self, inputs, outputs):
+
         frame3dd_opt = self.options["frame3dd_opt"]
         nLC = self.options["nLC"]
 
@@ -396,6 +397,7 @@ class TowerFrame(om.ExplicitComponent):
         outputs["fore_aft_modes"] = mshapes_x[:NFREQ2, :]
         outputs["side_side_modes"] = mshapes_y[:NFREQ2, :]
         outputs["torsion_modes"] = mshapes_z[:NFREQ2, :]
+        
 
         # deflections due to loading (from cylinder top and wind/wave loads)
         outputs["tower_deflection"] = np.sqrt(displacements.dx**2 + displacements.dy**2).T

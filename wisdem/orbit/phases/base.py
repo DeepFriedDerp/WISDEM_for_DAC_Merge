@@ -70,6 +70,7 @@ class BasePhase(ABC):
         missing = []
 
         for k, v in expected.items():
+
             if isinstance(k, str) and "variable" in k:
                 continue
 

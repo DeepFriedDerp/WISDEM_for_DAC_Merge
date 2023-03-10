@@ -16,7 +16,7 @@ from scipy.linalg import solve_banded
 
 
 def mode_fit(x, c2, c3, c4, c5, c6):
-    return c2 * x**2.0 + c3 * x**3.0 + c4 * x**4.0 + c5 * x**5.0 + c6 * x**6.0
+    return c2 * x ** 2.0 + c3 * x ** 3.0 + c4 * x ** 4.0 + c5 * x ** 5.0 + c6 * x ** 6.0
 
 
 def get_modal_coefficients(x, y, deg=[2, 3, 4, 5, 6], idx0=None, base_slope0=True):
@@ -40,7 +40,7 @@ def get_modal_coefficients(x, y, deg=[2, 3, 4, 5, 6], idx0=None, base_slope0=Tru
 
     # Get coefficients to 2-6th order polynomial
     p6 = np.polynomial.polynomial.polyfit(xn, y, deg)
-
+    
     # Normalize for Elastodyn
     # The normalization shouldn't be less than 1e-5 otherwise OpenFAST has trouble in single prec
     if y.ndim > 1:
@@ -55,6 +55,7 @@ def get_modal_coefficients(x, y, deg=[2, 3, 4, 5, 6], idx0=None, base_slope0=Tru
         normval = np.maximum(np.abs(tempsum), 1e-5)
         normval *= np.sign(tempsum)
         p6 /= normval
+        
 
     return p6
 
@@ -203,7 +204,6 @@ def get_xyz_mode_shapes(
             mshapes_z[i, :] = zpolys[freqs > 1e-1, :][z_polyidx, :]
             freq_z[i] = freqs_dyn[z_polyidx]
             used_freq_idx = record_used_freqs(z_polyidx, i, used_freq_idx)
-
     return freq_x, freq_y, freq_z, mshapes_x, mshapes_y, mshapes_z
 
 
@@ -278,7 +278,7 @@ def arc_length_deriv(points):
     # Break out the two-line calculation into subparts to help obtain
     # derivatives easier
     diff_points = np.diff(points, axis=0)
-    sum_diffs = np.sum(diff_points**2, axis=1)
+    sum_diffs = np.sum(diff_points ** 2, axis=1)
     cartesian_distances = np.sqrt(sum_diffs)
     cum_sum_distances = np.cumsum(cartesian_distances)
     arc_distances = np.r_[0.0, cum_sum_distances]
@@ -537,14 +537,14 @@ def cubic_with_deriv(x, xp, yp):
 
         A = (x2 - x[i]) / (x2 - x1)
         B = 1 - A
-        C = 1.0 / 6 * (A**3 - A) * (x2 - x1) ** 2
-        D = 1.0 / 6 * (B**3 - B) * (x2 - x1) ** 2
+        C = 1.0 / 6 * (A ** 3 - A) * (x2 - x1) ** 2
+        D = 1.0 / 6 * (B ** 3 - B) * (x2 - x1) ** 2
 
         y[i] = A * y1 + B * y2 + C * fpp[j] + D * fpp[j + 1]
         dAdx = -1.0 / (x2 - x1)
         dBdx = -dAdx
-        dCdx = 1.0 / 6 * (3 * A**2 - 1) * dAdx * (x2 - x1) ** 2
-        dDdx = 1.0 / 6 * (3 * B**2 - 1) * dBdx * (x2 - x1) ** 2
+        dCdx = 1.0 / 6 * (3 * A ** 2 - 1) * dAdx * (x2 - x1) ** 2
+        dDdx = 1.0 / 6 * (3 * B ** 2 - 1) * dBdx * (x2 - x1) ** 2
         dydx[i] = dAdx * y1 + dBdx * y2 + dCdx * fpp[j] + dDdx * fpp[j + 1]
 
     if n == 1:
@@ -569,6 +569,7 @@ def trapz_deriv(y, x):
 
 
 def _smooth_maxmin(yd, ymax, maxmin, pct_offset=0.01, dyd=None):
+
     yd, n = _checkIfFloat(yd)
 
     y1 = (1 - pct_offset) * ymax
@@ -712,6 +713,7 @@ def sectional2nodal(x):
 
 
 def cubic_spline_eval(x1, x2, f1, f2, g1, g2, x):
+
     spline = CubicSplineSegment(x1, x2, f1, f2, g1, g2)
     return spline.eval(x)
 
@@ -720,15 +722,16 @@ class CubicSplineSegment(object):
     """cubic splines and the their derivatives with with respect to the variables and the parameters"""
 
     def __init__(self, x1, x2, f1, f2, g1, g2):
+
         self.x1 = x1
         self.x2 = x2
 
         self.A = np.array(
             [
-                [x1**3, x1**2, x1, 1.0],
-                [x2**3, x2**2, x2, 1.0],
-                [3 * x1**2, 2 * x1, 1.0, 0.0],
-                [3 * x2**2, 2 * x2, 1.0, 0.0],
+                [x1 ** 3, x1 ** 2, x1, 1.0],
+                [x2 ** 3, x2 ** 2, x2, 1.0],
+                [3 * x1 ** 2, 2 * x1, 1.0, 0.0],
+                [3 * x2 ** 2, 2 * x2, 1.0, 0.0],
             ]
         )
         self.b = np.array([f1, f2, g1, g2])
@@ -745,13 +748,14 @@ class CubicSplineSegment(object):
         return polyd(x)
 
     def eval_deriv_params(self, xvec, dx1, dx2, df1, df2, dg1, dg2):
+
         x1 = self.x1
         x2 = self.x2
         dA_dx1 = np.array(
-            [[3 * x1**2, 2 * x1, 1.0, 0.0], [0.0, 0.0, 0.0, 0.0], [6 * x1, 2.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0]]
+            [[3 * x1 ** 2, 2 * x1, 1.0, 0.0], [0.0, 0.0, 0.0, 0.0], [6 * x1, 2.0, 0.0, 0.0], [0.0, 0.0, 0.0, 0.0]]
         )
         dA_dx2 = np.array(
-            [[0.0, 0.0, 0.0, 0.0], [3 * x2**2, 2 * x2, 1.0, 0.0], [0.0, 0.0, 0.0, 0.0], [6 * x2, 2.0, 0.0, 0.0]]
+            [[0.0, 0.0, 0.0, 0.0], [3 * x2 ** 2, 2 * x2, 1.0, 0.0], [0.0, 0.0, 0.0, 0.0], [6 * x2, 2.0, 0.0, 0.0]]
         )
         df = np.array([df1, df2, dg1, dg2])
         c = np.array(self.coeff).T

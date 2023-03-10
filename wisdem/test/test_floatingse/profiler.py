@@ -1,5 +1,5 @@
-import pstats
 import cProfile
+import pstats
 
 import floatingse.floating as ff
 import floatingse.semiInstance as se

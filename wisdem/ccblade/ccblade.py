@@ -206,6 +206,7 @@ class CCAirfoil(object):
             return cl, cd
 
     def derivatives(self, alpha, Re):
+
         # note: direct call to bisplev will be unnecessary with latest scipy update (add derivative method)
         tck_cl = self.cl_spline.tck[:3] + self.cl_spline.degrees  # concatenate lists
         tck_cd = self.cd_spline.tck[:3] + self.cd_spline.degrees
@@ -361,7 +362,7 @@ class CCAirfoil(object):
 
         self.unsteady = unsteady
 
-    def af_flap_coords(
+    def af_dac_coords(
         self, xfoil_path, delta_flap=12.0, xc_hinge=0.8, yt_hinge=0.5, numNodes=250, multi_run=False, MPI_run=False
     ):
         # This function is used to create and run xfoil to get airfoil coordinates for a given flap deflection
@@ -438,10 +439,10 @@ class CCAirfoil(object):
 
         # Load in saved airfoil coordinates (with flap) from xfoil and save to instance variables
         flap_coords = np.loadtxt(saveFlnmAF)
-        self.af_flap_xcoords = flap_coords[:, 0]
-        self.af_flap_ycoords = flap_coords[:, 1]
-        self.ctrl = delta_flap  # bem: the way that this function is called in rotor_geometry_yaml, this instance is not going to be used when calculating polars
-
+        self.af_dac_xcoords = flap_coords[:, 0]
+        self.af_dac_ycoords = flap_coords[:, 1]
+        self.ctrl = delta_flap  # TODO ben: need to check if this should be passed back in radians # bem: the way that this function is called in rotor_geometry_yaml, this instance is not going to be used when calculating polars
+        
         # Delete uneeded txt files script file
         if os.path.exists(CoordsFlnmAF):
             os.remove(CoordsFlnmAF)
@@ -451,6 +452,12 @@ class CCAirfoil(object):
             os.remove(saveFlnmAF)
         if os.path.exists(NUL_fname):
             os.remove(NUL_fname)
+
+    def af_dac_coords_lems(
+        self, dac_coords_x,dac_coords_y
+    ):
+        self.af_dac_xcoords = dac_coords_x
+        self.af_dac_ycoords = dac_coords_y
 
 
 # ------------------
@@ -620,6 +627,7 @@ class CCBlade(object):
         ap = 0.0
 
         for i in range(self.iterRe):
+
             alpha, W, Re = _bem.relativewind(phi, a, ap, Vx, Vy, self.pitch, chord, theta, self.rho, self.mu)
             cl, cd = af.evaluate(alpha, Re)
 
@@ -644,6 +652,7 @@ class CCBlade(object):
         a = 0.0
         ap = 0.0
         for i in range(self.iterRe):
+
             fzero, a, ap = _bem.inductionfactors(
                 r, chord, self.Rhub, self.Rtip, phi, cl, cd, self.B, Vx, Vy, **self.bemoptions
             )
@@ -714,6 +723,7 @@ class CCBlade(object):
     def __loads(self, phi, rotating, r, chord, theta, af, Vx, Vy):
         """normal and tangential loads at one section (and optionally derivatives)"""
         if Vx != 0.0 and Vy != 0.0:
+
             cphi = np.cos(phi)
             sphi = np.sin(phi)
 
@@ -737,6 +747,7 @@ class CCBlade(object):
             alpha_deg = np.rad2deg(alpha_rad)
 
             if self.derivatives:
+
                 # derivative of residual function
                 if rotating:
                     dR_dx, da_dx, dap_dx = self.__residualDerivatives(phi, r, chord, theta, af, Vx, Vy)
@@ -956,6 +967,7 @@ class CCBlade(object):
 
         # ---------------- loop across blade ------------------
         for i in range(n):
+
             # index dependent arguments
             if self.inverse_analysis == True:
                 args = (self.r[i], self.chord[i], self.cl[i], self.cd[i], self.af[i], Vx[i], Vy[i])
@@ -963,9 +975,11 @@ class CCBlade(object):
                 args = (self.r[i], self.chord[i], self.theta[i], self.af[i], Vx[i], Vy[i])
 
             if not rotating:  # non-rotating
+
                 phi_star = np.pi / 2.0
 
             else:
+
                 # ------ BEM solution method see (Ning, doi:10.1002/we.1636) ------
 
                 # set standard limits
@@ -974,6 +988,7 @@ class CCBlade(object):
                 phi_upper = np.pi / 2
 
                 if errf(phi_lower, *args) * errf(phi_upper, *args) > 0:  # an uncommon but possible case
+
                     if errf(-np.pi / 4, *args) < 0 and errf(-epsilon, *args) > 0:
                         phi_lower = -np.pi / 4
                         phi_upper = -epsilon
@@ -985,6 +1000,7 @@ class CCBlade(object):
                     phi_star = brentq(errf, phi_lower, phi_upper, args=args, disp=False)
 
                 except ValueError:
+
                     warnings.warn("error.  check input values.")
                     phi_star = 0.0
 
@@ -1051,6 +1067,7 @@ class CCBlade(object):
 
         derivs = {}
         if self.derivatives:
+
             # chain rule
             dNp_dw = dNp_dVx * dVx_dw + dNp_dVy * dVy_dw
             dTp_dw = dTp_dVx * dVx_dw + dTp_dVy * dVy_dw
@@ -1258,6 +1275,7 @@ class CCBlade(object):
 
         azimuth_angles = np.linspace(0.0, 2 * np.pi, nsec + 1)[:-1]
         for i in range(npts):  # iterate across conditions
+
             for azimuth in azimuth_angles:  # integrate across azimuth
                 ca = np.cos(azimuth)
                 sa = np.sin(azimuth)
@@ -1358,6 +1376,7 @@ class CCBlade(object):
             CMb = Mb / (q * self.rotorR * A)
 
             if self.derivatives:
+
                 # s = [precone, tilt, hubHt, Rhub, Rtip, precurvetip, presweeptip, yaw, shear, Uinf, Omega, pitch]
 
                 dR_ds = np.r_[
@@ -1740,6 +1759,7 @@ class CCBlade(object):
         dP_dv,
         npts,
     ):
+
         # pack derivatives into dictionary
         dT = {}
         dY = {}

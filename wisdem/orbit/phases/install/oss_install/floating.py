@@ -130,6 +130,7 @@ class FloatingSubstationInstallation(InstallPhase):
 
     @property
     def detailed_output(self):
+
         return {}
 
 
@@ -158,6 +159,7 @@ def install_floating_substations(vessel, feed, distance, towing_speed, depth, nu
     travel_time = distance / towing_speed
 
     for _ in range(number):
+
         start = vessel.env.now
         yield feed.get()
         delay = vessel.env.now - start

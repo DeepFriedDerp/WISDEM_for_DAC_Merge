@@ -85,6 +85,7 @@ class HubShell(om.ExplicitComponent):
         self.options.declare("gamma", default=1.0)
 
     def setup(self):
+
         # Inputs
         self.add_input("flange_t2shell_t", val=0.0)
         self.add_input("flange_OD2hub_D", val=0.0)
@@ -107,6 +108,7 @@ class HubShell(om.ExplicitComponent):
         self.add_output("constr_hub_diameter", val=0.0, units="m")
 
     def compute(self, inputs, outputs, discrete_inputs, discrete_outputs):
+
         # User diameter
         dsgn_hub_diam = inputs["hub_diameter"]
 
@@ -220,6 +222,7 @@ class Spinner(om.ExplicitComponent):
         self.options.declare("gamma", default=False)
 
     def setup(self):
+
         # Inputs
         self.add_discrete_input("n_blades", val=0)
         self.add_discrete_input("n_front_brackets", val=0)
@@ -377,6 +380,7 @@ class PitchSystem(om.ExplicitComponent):
         self.options.declare("verbosity", default=False)
 
     def setup(self):
+
         # Inputs
         self.add_discrete_input("n_blades", val=0)
         self.add_input("blade_mass", val=0.0, units="kg")
@@ -391,6 +395,7 @@ class PitchSystem(om.ExplicitComponent):
         self.add_output("pitch_I", val=np.zeros(6), units="kg*m**2")
 
     def compute(self, inputs, outputs, discrete_inputs, discrete_outputs):
+
         mass = inputs["pitch_system_scaling_factor"] * (
             0.22 * inputs["blade_mass"] * discrete_inputs["n_blades"]
             + 12.6 * np.abs(inputs["BRFM"]) * inputs["rho"] / inputs["Xy"]
@@ -590,6 +595,7 @@ class Hub_System(om.Group):
 
 
 if __name__ == "__main__":
+
     hub_prob = om.Problem(model=Hub_System(), reports=False)
     hub_prob.setup()
 

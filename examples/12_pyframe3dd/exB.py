@@ -2,7 +2,6 @@
 # encoding: utf-8
 
 import numpy as np
-
 import wisdem.pyframe3dd.pyframe3dd as pyframe3dd
 
 # 0 ------- node data ----------------
@@ -187,6 +186,7 @@ print()
 
 # node displacements
 for iCase in range(nC):
+
     print("case_idx:", iCase)
 
     print("node:", displacements.node[iCase, :])
@@ -221,6 +221,7 @@ print()
 # internal forces
 iE = 3  # note just showing for one element
 for iCase in range(nC):
+
     print("case_idx:", iCase)
     print("element_idx:", iE)
 
@@ -242,6 +243,7 @@ print()
 
 # Modal data
 for iM in range(nM):
+
     print("mode_idx", iM)
 
     print("freq =", modal.freq[iM])

@@ -1,7 +1,8 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from wisdem.ccblade.ccblade import CCBlade, CCAirfoil
+from wisdem.ccblade.ccblade import CCAirfoil, CCBlade
+
 
 plot_flag = False
 
